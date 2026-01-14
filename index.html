@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CitiCo | Citizens Co-create the Future.</title>
+    <meta name="description" content="CitiCo - Citizen × Co-creation × Company. 市民の声からはじまる、社会課題共創プラットフォーム。">
+    <style>
+        /* * CitiCo Design System 
+         * Tone: Ceremonial, Quiet, Gentle, Public
+         */
+        
+        :root {
+            /* Color Palette */
+            --c-bg: #F9F8F4;        /* 生成り/オフホワイト: 紙のような質感 */
+            --c-text: #1A2338;      /* 濃紺: インクのような深い色 */
+            --c-sub: #58637A;       /* グレーがかった紺: サブテキスト */
+            --c-accent: #C7BFA0;    /* 淡いシャンパンゴールド/ベージュ: 控えめな装飾 */
+            --c-border: #E6E2D6;    /* 背景に馴染むボーダー色 */
+            --c-white: #FFFFFF;
+
+            /* Spacing */
+            --sp-section: 120px;
+            --sp-card: 40px;
+            
+            /* Typography */
+            --font-base: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            --font-serif: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", serif; /* 儀式性の演出 */
+        }
+
+        /* Reset & Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--c-bg);
+            color: var(--c-text);
+            font-family: var(--font-base);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.3s ease;
+        }
+
+        a:hover {
+            opacity: 0.7;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Typography Utilities */
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            font-weight: normal;
+            letter-spacing: 0.05em;
+        }
+
+        .text-serif {
+            font-family: var(--font-serif);
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* * Components 
+         */
+
+        /* Section Styling */
+        section {
+            padding: var(--sp-section) 0;
+            border-bottom: 1px solid var(--c-border);
+        }
+        
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-header {
+            margin-bottom: 64px;
+            text-align: left;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* 控えめな装飾線 */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 1px;
+            background-color: var(--c-accent);
+        }
+
+        .section-desc {
+            color: var(--c-sub);
+            max-width: 600px;
+            margin-top: 24px;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--c-white);
+            padding: 32px;
+            border: 1px solid var(--c-border);
+            border-radius: 4px; /* わずかな角丸 */
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(26, 35, 56, 0.05);
+            border-color: var(--c-accent);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+            color: var(--c-text);
+            font-family: var(--font-serif);
+        }
+
+        .card-text {
+            font-size: 0.95rem;
+            color: var(--c-sub);
+            line-height: 1.7;
+        }
+
+        /* * Layout Sections 
+         */
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(249, 248, 244, 0.95); /* 背景色を透過 */
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid var(--c-border);
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            letter-spacing: 0.05em;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            color: var(--c-sub);
+        }
+
+        /* Hero Section */
+        #hero {
+            padding: 160px 0 120px;
+            text-align: center;
+            border-bottom: 1px solid var(--c-border);
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        .hero-sub {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--c-sub);
+            margin-bottom: 48px;
+            font-style: italic;
+        }
+
+        .hero-copy-jp {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .hero-text {
+            font-size: 1rem;
+            color: var(--c-sub);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about-concept {
+            font-size: 3rem;
+            font-family: var(--font-serif);
+            color: rgba(26, 35, 56, 0.1); /* 薄く背景のように */
+            margin-bottom: -20px;
+            line-height: 1;
+        }
+
+        .about-content {
+            position: relative;
+            padding-top: 24px;
+        }
+
+        /* How it works */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .step-item {
+            position: relative;
+        }
+
+        .step-number {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            color: var(--c-accent);
+            opacity: 0.6;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* Tools & Roles */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        /* Social Return */
+        .return-list {
+            margin-top: 32px;
+            border-top: 1px solid var(--c-border);
+        }
+
+        .return-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--c-border);
+        }
+
+        .return-item-title {
+            font-weight: bold;
+            width: 30%;
+        }
+
+        .return-item-desc {
+            width: 65%;
+            color: var(--c-sub);
+        }
+
+        /* Hashtags */
+        .hashtag-display {
+            font-size: 1.5rem;
+            font-family: var(--font-serif);
+            color: var(--c-sub);
+            margin-top: 24px;
+        }
+        
+        .sub-tags {
+            font-size: 1rem;
+            margin-top: 16px;
+            color: var(--c-accent);
+        }
+
+        /* Updates */
+        .update-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 16px;
+            color: var(--c-sub);
+        }
+
+        .update-list li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: var(--c-accent);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--c-sub);
+        }
+
+        .footer-links {
+            margin-top: 16px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            :root {
+                --sp-section: 80px;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .header-inner {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            header {
+                height: auto;
+                padding: 16px 0;
+            }
+
+            .nav-links {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .steps-grid, .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .return-item {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .return-item-title, .return-item-desc {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo">CitiCo</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#how-it-works">How it works</a></li>
+                    <li><a href="#social-return">Social Return</a></li>
+                    <li><a href="#updates">Updates</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="container">
+                <h1 class="hero-title">CitiCo</h1>
+                <p class="hero-sub">Citizens Co-create the Future.</p>
+                
+                <p class="hero-copy-jp">市民の声からはじまる、<br class="mobile-only">やさしい共創プラットフォーム。</p>
+                <p class="hero-text">
+                    動画から市民の「困りごと」や「願い」を掬い上げ、企業と共に解決へ。<br>
+                    収益は食糧支援や教育支援へと還元し、循環する社会をつくります。
+                </p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="container">
+                <div class="about-concept">C × C × C</div>
+                <div class="about-content">
+                    <div class="section-header">
+                        <h2 class="section-title">About CitiCo</h2>
+                    </div>
+                    <p class="card-text" style="font-size: 1.1rem; max-width: 720px;">
+                        CitiCoは、市民（Citizen）が企業（Company）と共に（Co-creation）社会課題を解決していくためのパブリック・プラットフォームです。<br><br>
+                        私たちは、日々の暮らしの中に埋もれている「小さな声」に耳を澄ませます。
+                        TikTokなどのソーシャルメディアを通じて発信される生の声を起点に、食糧支援や教育支援につながるプロジェクトを立ち上げ、
+                        持続可能な社会還元モデルを構築します。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it works Section -->
+        <section id="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">How it works</h2>
+                    <p class="section-desc">市民の声がプロジェクトになり、社会へ還元されるまでのプロセス。</p>
+                </div>
+                
+                <div class="steps-grid">
+                    <div class="step-item card">
+                        <span class="step-number">01</span>
+                        <h3 class="card-title">Voice</h3>
+                        <p class="card-text">
+                            市民が<strong>TikTok</strong>に投稿。<br>
+                            ハッシュタグ #CitiCo をつけ、影だけや抽象的な表現を用いて、日常の「困りごと」や「アイデア」を発信します。
+                        </p>
+                    </div>
+                    <div class="step-item card">
+                        <span class="step-number">02</span>
+                        <h3 class="card-title">Pickup</h3>
+                        <p class="card-text">
+                            <strong>CitiCo公式</strong>が投稿をピックアップ。<br>
+                            世界観を統一したCapCutテンプレートを用いてリメイクし、課題を可視化します。
+                        </p>
+                    </div>
+                    <div class="step-item card">
+                        <span class="step-number">03</span>
+                        <h3 class="card-title">Analysis</h3>
+                        <p class="card-text">
+                            <strong>Gemini</strong>による分析と企画。<br>
+                            投稿された課題の背景をAIが整理・言語化し、企業パートナーと共に具体的な解決策を企画します。
+                        </p>
+                    </div>
+                    <div class="step-item card">
+                        <span class="step-number">04</span>
+                        <h3 class="card-title">Return</h3>
+                        <p class="card-text">
+                            収益を<strong>社会に還元</strong>。<br>
+                            プロジェクト収益の一部を食糧・教育支援へ還元。その実績はGitHub上で透明性を持って公開されます。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools & Roles Section -->
+        <section id="tools">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Tools & Roles</h2>
+                    <p class="section-desc">CitiCoのエコシステムを支える、4つの主要チャネル。</p>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="card">
+                        <h3 class="card-title">Gemini</h3>
+                        <p class="card-text">
+                            市民の声（動画データ）から課題の本質を分析し、企画・言語化を担います。法的・倫理的なリスクチェックも行い、安全なプロジェクト進行を支えます。
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">TikTok</h3>
+                        <p class="card-text">
+                            市民参加のメインステージです。ハッシュタグ #CitiCo のハブとして機能し、ここから全てのプロジェクトが始まります。
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">CapCut</h3>
+                        <p class="card-text">
+                            CitiCoの世界観を保つための「工房」です。誰でも簡単に美しい発信ができるよう、統一された動画テンプレートを提供します。
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">GitHub</h3>
+                        <p class="card-text">
+                            プラットフォームの心臓部です。プロジェクトのアーカイブ、ポリシーの策定、そして社会還元レポートをパブリックに公開します。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Return Section -->
+        <section id="social-return">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Social Return</h2>
+                    <p class="section-desc">
+                        得られた収益は、透明性を持って社会課題の解決へ充当します。<br>
+                        現在はパイロットフェーズであり、詳細なスキームは順次公開予定です。
+                    </p>
+                </div>
+
+                <div class="return-list">
+                    <div class="return-item">
+                        <div class="return-item-title">Food Support</div>
+                        <div class="return-item-desc">
+                            フードバンクや地域食堂への寄付、廃棄食材を活用した新製品開発による還元など、食のセーフティネット構築を支援します。
+                        </div>
+                    </div>
+                    <div class="return-item">
+                        <div class="return-item-title">Education Support</div>
+                        <div class="return-item-desc">
+                            経済的な理由で学びを諦めないための学習機会の提供、教材支援、および市民プロジェクトから生まれた「小さな奨学金」制度の創設を目指します。
+                        </div>
+                    </div>
+                    <div class="return-item">
+                        <div class="return-item-title">Transparency</div>
+                        <div class="return-item-desc">
+                            どこから収益が生まれ、どこへ還ったのか。簡易レポートをGitHub上で定期的に公開し、市民への説明責任を果たします。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hashtags Section -->
+        <section id="hashtags">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Hashtags</h2>
+                    <p class="section-desc">あなたの声を届けるためのキーワード。</p>
+                </div>
+                <div class="hashtag-display">
+                    #CitiCo
+                </div>
+                <div class="sub-tags">
+                    #CitiCoFood &nbsp; #CitiCoEdu &nbsp; #CitiCoProject
+                </div>
+            </div>
+        </section>
+
+        <!-- Updates / Roadmap Section -->
+        <section id="updates">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Updates</h2>
+                </div>
+                <ul class="update-list">
+                    <li>CitiCoパイロットプロジェクト準備中</li>
+                    <li>食と教育に関する最初の市民投稿キャンペーンを企画中</li>
+                    <li>企業パートナー募集ページを近日公開予定</li>
+                    <li>公式GitHubリポジトリにてガイドライン策定中</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CitiCo. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#" aria-label="GitHub Repository">GitHub</a>
+                <a href="#" aria-label="TikTok Account">TikTok</a>
+                <a href="#" aria-label="Contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
